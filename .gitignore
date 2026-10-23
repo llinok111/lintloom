@@ -1,0 +1,18 @@
+# 虚拟环境与构建产物
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# 运行期产物
+.lintloom-work/
+.lintloom-backups/
+.tmp/
+*.log
+
+# 浏览器验收产物
+shots/
+node_modules/
+
+# 演示 / 临时数据
+workspace/ui-demo/

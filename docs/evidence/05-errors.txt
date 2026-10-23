@@ -1,0 +1,13 @@
+### unknown dialect ###
+Error: Unknown dialect 'notadialect'
+exit=2
+
+### missing path ###
+
+User Error: Specified path does not exist. Check it/they exist(s): samples/nope.sql.
+exit=2
+
+### unknown rule ###
+WARNING    Tried to allowlist unknown rule references: ['ZZ999'] 
+[{"filepath": "samples\\messy_orders.sql", "violations": [], "statistics": {"source_chars": 218, "templated_chars": 218, "segments": 176, "raw_segments": 124}, "timings": {"templating": 0.00039140000080806203, "lexing": 0.0021181000010983553, "parsing": 0.034001899999566376, "linting": 0.0004741000011563301}}]
+exit=0

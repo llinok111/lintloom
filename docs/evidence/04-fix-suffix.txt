@@ -1,0 +1,44 @@
+==== finding fixable violations ====
+== [.tmp\fixdemo\messy_orders.sql] FAIL
+L:   1 | P:   1 | LT09 | Select targets should be on a new line unless there is
+                       | only one select target. [layout.select_targets]
+L:   1 | P:  13 | LT01 | Expected single whitespace between comma ',' and naked
+                       | identifier. [layout.spacing]
+L:   1 | P:  19 | LT01 | Unexpected whitespace before comma ','. [layout.spacing]
+L:   2 | P:  13 | AL01 | Implicit/explicit aliasing of table. [aliasing.table]
+L:   2 | P:  13 | CP01 | Keywords must be consistently lower case.
+                       | [capitalisation.keywords]
+L:   2 | P:  15 | AM05 | Join clauses should be fully qualified. [ambiguous.join]
+L:   2 | P:  32 | AL01 | Implicit/explicit aliasing of table. [aliasing.table]
+L:   2 | P:  32 | CP01 | Keywords must be consistently lower case.
+                       | [capitalisation.keywords]
+L:   2 | P:  41 | LT01 | Expected single whitespace between naked identifier and
+                       | raw comparison operator '='. [layout.spacing]
+L:   2 | P:  42 | LT01 | Expected single whitespace between raw comparison
+                       | operator '=' and naked identifier. [layout.spacing]
+L:   3 | P:  47 | LT01 | Expected single whitespace between naked identifier and
+                       | raw comparison operator '<'. [layout.spacing]
+L:   3 | P:  49 | LT01 | Expected single whitespace between raw comparison
+                       | operator '>' and quoted literal. [layout.spacing]
+L:   4 | P:  15 | LT01 | Expected single whitespace between comma ',' and naked
+                       | identifier. [layout.spacing]
+L:   5 | P:  21 | LT01 | Expected single whitespace between end bracket ')' and
+                       | raw comparison operator '>'. [layout.spacing]
+L:   5 | P:  22 | LT01 | Expected single whitespace between raw comparison
+                       | operator '>' and numeric literal. [layout.spacing]
+== [.tmp\fixdemo\messy_orders.sql] FIXED
+15 fixable linting violations found
+  [1 unfixable linting violations found]
+exit=1
+messy_orders.sql
+messy_orders_fixed.sql
+--- fixed file ---
+select
+    a.id,
+    a.name,
+    sum(b.amount) as total
+from orders as a inner join order_items as b on a.id = b.order_id
+where a.created_at > '2024-01-01' and b.status <> 'cancelled'
+group by a.id, a.name
+having sum(b.amount) > 100
+order by 3 desc

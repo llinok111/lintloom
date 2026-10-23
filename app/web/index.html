@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LintLoom · SQL 质量工作台</title>
+<link rel="stylesheet" href="/assets/styles.css">
+<script>
+  window.__LINTLOOM__ = {
+    token: "%%TOKEN%%",
+    version: "%%VERSION%%",
+    upstream: "%%UPSTREAM%%"
+  };
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="mark"></span>
+    <span class="name">LintLoom</span>
+    <span class="ver">v%%VERSION%%</span>
+  </div>
+  <div class="tagline">sqlfluff %%UPSTREAM%% · 诊断 → 修复 → 复核 闭环工作台</div>
+  <div class="env" id="envBadges" title="环境自检结果"></div>
+</header>
+
+<div class="layout">
+  <aside class="rail">
+    <section class="panel">
+      <div class="panel-h">
+        <span>数据源</span>
+        <span class="seg" id="modeSeg">
+          <button data-mode="file" class="on">文件</button>
+          <button data-mode="buffer">缓冲区</button>
+        </span>
+      </div>
+      <div id="filePane">
+        <select id="rootSel" class="rootsel" title="可访问的根目录（由启动参数 --root 决定）"></select>
+        <div class="crumbs" id="crumbs"></div>
+        <ul class="tree" id="tree"></ul>
+        <div class="sel" id="selection">未选择目标</div>
+      </div>
+      <div id="bufferPane" hidden>
+        <textarea id="buffer" spellcheck="false" placeholder="在这里粘贴 SQL，直接走 stdin 诊断（不落盘）"></textarea>
+        <div class="row tight">
+          <button id="bufferSample" class="ghost">载入样例</button>
+          <span class="muted" id="bufferStat">0 字符</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-h"><span>方言</span><span class="muted" id="dialectMeta"></span></div>
+      <select id="dialect"></select>
+      <div class="hint" id="dialectHint"></div>
+    </section>
+
+    <section class="panel rules-panel">
+      <div class="panel-h"><span>规则</span><span class="muted" id="ruleCount"></span></div>
+      <input id="ruleFilter" class="search" placeholder="过滤规则码 / 名称 / 说明">
+      <div class="chips" id="groupChips"></div>
+      <div class="rules" id="ruleList"></div>
+      <div class="row tight">
+        <button id="rulesAll" class="ghost">全选</button>
+        <button id="rulesNone" class="ghost">清空</button>
+        <button id="rulesCore" class="ghost">仅 core</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-h"><span>执行</span></div>
+      <label class="field">超时（秒）<input id="timeout" type="number" min="1" max="300" step="1" value="60"></label>
+      <label class="check"><input type="checkbox" id="noqa" checked> 尊重文件内 <code>-- noqa</code> 注释</label>
+      <div class="actions">
+        <button id="btnLint" class="primary">诊断</button>
+        <button id="btnPreview">修复预览</button>
+        <button id="btnApply" class="danger">应用修复</button>
+        <button id="btnParse">语法树</button>
+        <button id="btnCancel" class="ghost" hidden>取消作业</button>
+      </div>
+      <div class="hint">诊断与预览均在临时副本上执行，不改动磁盘；<b>应用修复</b>需二次确认，原件先备份到 <code>.lintloom-backups/</code>。</div>
+    </section>
+  </aside>
+
+  <main class="main">
+    <div class="statusbar">
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="status" id="statusText">就绪 · 选择左侧目标后执行</div>
+      <div class="stats" id="statLine"></div>
+    </div>
+
+    <nav class="tabs" id="tabs">
+      <button data-tab="issues" class="on">问题 <b id="tabIssues">0</b></button>
+      <button data-tab="diff">修复差异 <b id="tabDiff">0</b></button>
+      <button data-tab="code">代码</button>
+      <button data-tab="syntax">语法树</button>
+      <button data-tab="timing">计时</button>
+      <button data-tab="log">运行日志</button>
+      <button data-tab="diag">错误诊断 <b id="tabDiag">0</b></button>
+    </nav>
+
+    <div class="views">
+      <section class="view on" id="view-issues">
+        <div class="empty" id="issuesEmpty">还没有结果。点「诊断」开始。</div>
+        <div id="issuesBody" hidden></div>
+      </section>
+
+      <section class="view" id="view-diff">
+        <div class="empty" id="diffEmpty">「修复预览」会在这里显示逐行差异，并对修复后的内容再跑一次诊断。</div>
+        <div id="diffBody" hidden></div>
+      </section>
+
+      <section class="view" id="view-code">
+        <div class="empty" id="codeEmpty">点击左侧文件或问题行，查看带行号的原文。</div>
+        <div id="codeBody" hidden>
+          <div class="code-head" id="codeHead"></div>
+          <div class="code-wrap"><pre class="code" id="codePre"></pre></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-syntax">
+        <div class="empty" id="syntaxEmpty">对单个 .sql 文件点「语法树」，查看 sqlfluff 解析出的 segment 树。</div>
+        <div id="syntaxBody" hidden>
+          <div class="row"><input id="syntaxFilter" class="search" placeholder="过滤节点类型 / 文本"><span class="muted" id="syntaxMeta"></span></div>
+          <div class="treeview" id="syntaxTree"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-timing">
+        <div class="empty" id="timingEmpty">跑一次「诊断」后，这里展示上游自报的阶段耗时与规则耗时。</div>
+        <div id="timingBody" hidden></div>
+      </section>
+
+      <section class="view" id="view-log">
+        <div class="empty" id="logEmpty">作业启动后，这里会显示真实执行的命令行、退出码与原始输出。</div>
+        <div id="logBody" hidden><ol class="log" id="logList"></ol></div>
+      </section>
+
+      <section class="view" id="view-diag">
+        <div class="empty" id="diagEmpty">超时、方言错误、路径错误、解析失败都会被归类并给出处置建议。</div>
+        <div id="diagBody" hidden></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card">
+    <h3 id="modalTitle">确认</h3>
+    <div id="modalBody" class="modal-body"></div>
+    <div class="modal-actions">
+      <button id="modalCancel" class="ghost">取消</button>
+      <button id="modalOk" class="danger">确认执行</button>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/app.js"></script>
+</body>
+</html>

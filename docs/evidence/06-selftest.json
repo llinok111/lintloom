@@ -1,0 +1,1185 @@
+{
+  "app": {
+    "name": "LintLoom",
+    "version": "1.0.0"
+  },
+  "upstream": {
+    "repo": "sqlfluff/sqlfluff",
+    "pinned": "4.4.0",
+    "version": "4.4.0",
+    "cli": "python -m sqlfluff, version 4.4.0"
+  },
+  "python": {
+    "exe": "E:\\WorkBuddy-Work\\workbuddy-github-2\\lintloom\\.venv\\Scripts\\python.exe",
+    "version": "3.13.14"
+  },
+  "catalog": {
+    "ok": true,
+    "source": "python-api",
+    "version": "4.4.0",
+    "dialects": [
+      {
+        "label": "ansi",
+        "name": "ANSI",
+        "inherits_from": "nothing"
+      },
+      {
+        "label": "athena",
+        "name": "AWS Athena",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "bigquery",
+        "name": "Google BigQuery",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "clickhouse",
+        "name": "ClickHouse",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "databricks",
+        "name": "Databricks",
+        "inherits_from": "sparksql"
+      },
+      {
+        "label": "db2",
+        "name": "IBM Db2",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "doris",
+        "name": "Apache Doris",
+        "inherits_from": "mysql"
+      },
+      {
+        "label": "duckdb",
+        "name": "DuckDB",
+        "inherits_from": "postgres"
+      },
+      {
+        "label": "exasol",
+        "name": "Exasol",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "flink",
+        "name": "Apache Flink SQL",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "greenplum",
+        "name": "Greenplum",
+        "inherits_from": "postgres"
+      },
+      {
+        "label": "hive",
+        "name": "Apache Hive",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "impala",
+        "name": "Apache Impala",
+        "inherits_from": "hive"
+      },
+      {
+        "label": "mariadb",
+        "name": "MariaDB",
+        "inherits_from": "mysql"
+      },
+      {
+        "label": "materialize",
+        "name": "Materialize",
+        "inherits_from": "postgres"
+      },
+      {
+        "label": "mysql",
+        "name": "MySQL",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "oracle",
+        "name": "Oracle",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "postgres",
+        "name": "PostgreSQL",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "redshift",
+        "name": "AWS Redshift",
+        "inherits_from": "postgres"
+      },
+      {
+        "label": "snowflake",
+        "name": "Snowflake",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "soql",
+        "name": "Salesforce Object Query Language (SOQL)",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "sparksql",
+        "name": "Apache Spark SQL",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "sqlite",
+        "name": "SQLite",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "starrocks",
+        "name": "StarRocks",
+        "inherits_from": "mysql"
+      },
+      {
+        "label": "teradata",
+        "name": "Teradata",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "trino",
+        "name": "Trino",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "tsql",
+        "name": "Microsoft T-SQL",
+        "inherits_from": "ansi"
+      },
+      {
+        "label": "vertica",
+        "name": "Vertica",
+        "inherits_from": "ansi"
+      }
+    ],
+    "rules": [
+      {
+        "code": "AL01",
+        "name": "aliasing.table",
+        "description": "Implicit/explicit aliasing of table.",
+        "groups": [
+          "all",
+          "aliasing"
+        ],
+        "aliases": [
+          "L011"
+        ]
+      },
+      {
+        "code": "AL02",
+        "name": "aliasing.column",
+        "description": "Implicit/explicit aliasing of columns.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing"
+        ],
+        "aliases": [
+          "L012"
+        ]
+      },
+      {
+        "code": "AL03",
+        "name": "aliasing.expression",
+        "description": "Column expression without alias. Use explicit `AS` clause.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing"
+        ],
+        "aliases": [
+          "L013"
+        ]
+      },
+      {
+        "code": "AL04",
+        "name": "aliasing.unique.table",
+        "description": "Table aliases should be unique within each clause.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing",
+          "aliasing.unique"
+        ],
+        "aliases": [
+          "L020"
+        ]
+      },
+      {
+        "code": "AL05",
+        "name": "aliasing.unused",
+        "description": "Tables should not be aliased if that alias is not used.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing"
+        ],
+        "aliases": [
+          "L025"
+        ]
+      },
+      {
+        "code": "AL06",
+        "name": "aliasing.length",
+        "description": "Enforce table alias lengths in from clauses and join conditions.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing"
+        ],
+        "aliases": [
+          "L066"
+        ]
+      },
+      {
+        "code": "AL07",
+        "name": "aliasing.forbid",
+        "description": "Avoid table aliases in from clauses and join conditions.",
+        "groups": [
+          "all",
+          "aliasing"
+        ],
+        "aliases": [
+          "L031"
+        ]
+      },
+      {
+        "code": "AL08",
+        "name": "aliasing.unique.column",
+        "description": "Column aliases should be unique within each clause.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing",
+          "aliasing.unique"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "AL09",
+        "name": "aliasing.self_alias.column",
+        "description": "Column aliases should not alias to itself, i.e. self-alias.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "AL10",
+        "name": "aliasing.required",
+        "description": "Derived tables must have an alias.",
+        "groups": [
+          "all",
+          "core",
+          "aliasing"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "AM01",
+        "name": "ambiguous.distinct",
+        "description": "Ambiguous use of 'DISTINCT' in a 'SELECT' statement with 'GROUP BY'.",
+        "groups": [
+          "all",
+          "core",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L021"
+        ]
+      },
+      {
+        "code": "AM02",
+        "name": "ambiguous.union",
+        "description": "'UNION [DISTINCT|ALL]' is preferred over just 'UNION'.",
+        "groups": [
+          "all",
+          "core",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L033"
+        ]
+      },
+      {
+        "code": "AM03",
+        "name": "ambiguous.order_by",
+        "description": "Ambiguous ordering directions for columns in order by clause.",
+        "groups": [
+          "all",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L037"
+        ]
+      },
+      {
+        "code": "AM04",
+        "name": "ambiguous.column_count",
+        "description": "Query produces an unknown number of result columns.",
+        "groups": [
+          "all",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L044"
+        ]
+      },
+      {
+        "code": "AM05",
+        "name": "ambiguous.join",
+        "description": "Join clauses should be fully qualified.",
+        "groups": [
+          "all",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L051"
+        ]
+      },
+      {
+        "code": "AM06",
+        "name": "ambiguous.column_references",
+        "description": "Inconsistent column references in 'GROUP BY/ORDER BY' clauses.",
+        "groups": [
+          "all",
+          "core",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L054"
+        ]
+      },
+      {
+        "code": "AM07",
+        "name": "ambiguous.set_columns",
+        "description": "Queries within set query produce different numbers of columns.",
+        "groups": [
+          "all",
+          "ambiguous"
+        ],
+        "aliases": [
+          "L068"
+        ]
+      },
+      {
+        "code": "AM08",
+        "name": "ambiguous.join_condition",
+        "description": "Implicit cross join detected.",
+        "groups": [
+          "all",
+          "ambiguous"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "AM09",
+        "name": "ambiguous.order_by_limit",
+        "description": "Use of LIMIT and OFFSET without ORDER BY may lead to non-deterministic results.",
+        "groups": [
+          "all",
+          "ambiguous"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "CP01",
+        "name": "capitalisation.keywords",
+        "description": "Inconsistent capitalisation of keywords.",
+        "groups": [
+          "all",
+          "core",
+          "capitalisation"
+        ],
+        "aliases": [
+          "L010"
+        ]
+      },
+      {
+        "code": "CP02",
+        "name": "capitalisation.identifiers",
+        "description": "Inconsistent capitalisation of unquoted identifiers.",
+        "groups": [
+          "all",
+          "core",
+          "capitalisation"
+        ],
+        "aliases": [
+          "L014"
+        ]
+      },
+      {
+        "code": "CP03",
+        "name": "capitalisation.functions",
+        "description": "Inconsistent capitalisation of function names.",
+        "groups": [
+          "all",
+          "core",
+          "capitalisation"
+        ],
+        "aliases": [
+          "L030"
+        ]
+      },
+      {
+        "code": "CP04",
+        "name": "capitalisation.literals",
+        "description": "Inconsistent capitalisation of boolean/null literal.",
+        "groups": [
+          "all",
+          "core",
+          "capitalisation"
+        ],
+        "aliases": [
+          "L040"
+        ]
+      },
+      {
+        "code": "CP05",
+        "name": "capitalisation.types",
+        "description": "Inconsistent capitalisation of datatypes.",
+        "groups": [
+          "all",
+          "core",
+          "capitalisation"
+        ],
+        "aliases": [
+          "L063"
+        ]
+      },
+      {
+        "code": "CV01",
+        "name": "convention.not_equal",
+        "description": "Consistent usage of '!=' or '<>' for \"not equal to\" operator.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L061"
+        ]
+      },
+      {
+        "code": "CV02",
+        "name": "convention.coalesce",
+        "description": "Use 'COALESCE' instead of 'IFNULL' or 'NVL'.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L060"
+        ]
+      },
+      {
+        "code": "CV03",
+        "name": "convention.select_trailing_comma",
+        "description": "Trailing commas within select clause.",
+        "groups": [
+          "all",
+          "core",
+          "convention"
+        ],
+        "aliases": [
+          "L038"
+        ]
+      },
+      {
+        "code": "CV04",
+        "name": "convention.count_rows",
+        "description": "Use consistent syntax to express \"count number of rows\".",
+        "groups": [
+          "all",
+          "core",
+          "convention"
+        ],
+        "aliases": [
+          "L047"
+        ]
+      },
+      {
+        "code": "CV05",
+        "name": "convention.is_null",
+        "description": "Comparisons with NULL should use \"IS\" or \"IS NOT\".",
+        "groups": [
+          "all",
+          "core",
+          "convention"
+        ],
+        "aliases": [
+          "L049"
+        ]
+      },
+      {
+        "code": "CV06",
+        "name": "convention.terminator",
+        "description": "Statements must end with a semi-colon.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L052"
+        ]
+      },
+      {
+        "code": "CV07",
+        "name": "convention.statement_brackets",
+        "description": "Top-level statements should not be wrapped in brackets.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L053"
+        ]
+      },
+      {
+        "code": "CV08",
+        "name": "convention.left_join",
+        "description": "Use 'LEFT JOIN' instead of 'RIGHT JOIN'.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L055"
+        ]
+      },
+      {
+        "code": "CV09",
+        "name": "convention.blocked_words",
+        "description": "Block a list of configurable words from being used.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L062"
+        ]
+      },
+      {
+        "code": "CV10",
+        "name": "convention.quoted_literals",
+        "description": "Consistent usage of preferred quotes for quoted literals.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L064"
+        ]
+      },
+      {
+        "code": "CV11",
+        "name": "convention.casting_style",
+        "description": "Enforce consistent type casting style.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": [
+          "L067"
+        ]
+      },
+      {
+        "code": "CV12",
+        "name": "convention.join_condition",
+        "description": "Use `JOIN ... ON ...` instead of `WHERE ...` for join conditions.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "CV13",
+        "name": "convention.last_select_star",
+        "description": "The final 'SELECT' of a CTE model should be 'SELECT * FROM ...'.",
+        "groups": [
+          "all",
+          "convention"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "JJ01",
+        "name": "jinja.padding",
+        "description": "Jinja tags should have a single whitespace on either side.",
+        "groups": [
+          "all",
+          "core",
+          "jinja"
+        ],
+        "aliases": [
+          "L046"
+        ]
+      },
+      {
+        "code": "LT01",
+        "name": "layout.spacing",
+        "description": "Inappropriate Spacing.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L001",
+          "L005",
+          "L006",
+          "L008",
+          "L023",
+          "L024",
+          "L039",
+          "L048",
+          "L071"
+        ]
+      },
+      {
+        "code": "LT02",
+        "name": "layout.indent",
+        "description": "Incorrect Indentation.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L002",
+          "L003",
+          "L004"
+        ]
+      },
+      {
+        "code": "LT03",
+        "name": "layout.operators",
+        "description": "Operators should follow a standard for being before/after newlines.",
+        "groups": [
+          "all",
+          "layout"
+        ],
+        "aliases": [
+          "L007"
+        ]
+      },
+      {
+        "code": "LT04",
+        "name": "layout.commas",
+        "description": "Leading/Trailing comma enforcement.",
+        "groups": [
+          "all",
+          "layout"
+        ],
+        "aliases": [
+          "L019"
+        ]
+      },
+      {
+        "code": "LT05",
+        "name": "layout.long_lines",
+        "description": "Line is too long.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L016"
+        ]
+      },
+      {
+        "code": "LT06",
+        "name": "layout.functions",
+        "description": "Function name not immediately followed by parenthesis.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L017"
+        ]
+      },
+      {
+        "code": "LT07",
+        "name": "layout.cte_bracket",
+        "description": "'WITH' clause closing bracket should be on a new line.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L018"
+        ]
+      },
+      {
+        "code": "LT08",
+        "name": "layout.cte_newline",
+        "description": "Blank line expected but not found after CTE closing bracket.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L022"
+        ]
+      },
+      {
+        "code": "LT09",
+        "name": "layout.select_targets",
+        "description": "Select targets should be on a new line unless there is only one select target.",
+        "groups": [
+          "all",
+          "layout"
+        ],
+        "aliases": [
+          "L036"
+        ]
+      },
+      {
+        "code": "LT10",
+        "name": "layout.select_modifiers",
+        "description": "'SELECT' modifiers (e.g. 'DISTINCT') must be on the same line as 'SELECT'.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L041"
+        ]
+      },
+      {
+        "code": "LT11",
+        "name": "layout.set_operators",
+        "description": "Set operators should be surrounded by newlines.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L065"
+        ]
+      },
+      {
+        "code": "LT12",
+        "name": "layout.end_of_file",
+        "description": "Files must end with a single trailing newline.",
+        "groups": [
+          "all",
+          "core",
+          "layout"
+        ],
+        "aliases": [
+          "L009",
+          "layout.end-of-file"
+        ]
+      },
+      {
+        "code": "LT13",
+        "name": "layout.start_of_file",
+        "description": "Files must not begin with newlines or whitespace.",
+        "groups": [
+          "all",
+          "layout"
+        ],
+        "aliases": [
+          "L050"
+        ]
+      },
+      {
+        "code": "LT14",
+        "name": "layout.keyword_newline",
+        "description": "Keyword clauses should follow a standard for being before/after newlines.",
+        "groups": [
+          "all",
+          "layout"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "LT15",
+        "name": "layout.newlines",
+        "description": "Too many consecutive blank lines.",
+        "groups": [
+          "all",
+          "layout"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "OR01",
+        "name": "oracle.empty_batch",
+        "description": "Remove empty batches.",
+        "groups": [
+          "all",
+          "oracle"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "PG01",
+        "name": "postgres.excessive_locks",
+        "description": "Avoid excessive locks in PostgreSQL DDL statements.",
+        "groups": [
+          "all",
+          "postgres"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "PG02",
+        "name": "postgres.not_valid_foreign_key",
+        "description": "Create PostgreSQL foreign keys as 'NOT VALID' before validating.",
+        "groups": [
+          "all",
+          "postgres"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "RF01",
+        "name": "references.from",
+        "description": "References cannot reference objects not present in 'FROM' clause.",
+        "groups": [
+          "all",
+          "core",
+          "references"
+        ],
+        "aliases": [
+          "L026"
+        ]
+      },
+      {
+        "code": "RF02",
+        "name": "references.qualification",
+        "description": "References should be qualified if select has more than one referenced table/view.",
+        "groups": [
+          "all",
+          "references"
+        ],
+        "aliases": [
+          "L027"
+        ]
+      },
+      {
+        "code": "RF03",
+        "name": "references.consistent",
+        "description": "Column references should be qualified consistently in single table statements.",
+        "groups": [
+          "all",
+          "references"
+        ],
+        "aliases": [
+          "L028"
+        ]
+      },
+      {
+        "code": "RF04",
+        "name": "references.keywords",
+        "description": "Keywords should not be used as identifiers.",
+        "groups": [
+          "all",
+          "references"
+        ],
+        "aliases": [
+          "L029"
+        ]
+      },
+      {
+        "code": "RF05",
+        "name": "references.special_chars",
+        "description": "Do not use special characters in identifiers.",
+        "groups": [
+          "all",
+          "references"
+        ],
+        "aliases": [
+          "L057"
+        ]
+      },
+      {
+        "code": "RF06",
+        "name": "references.quoting",
+        "description": "Unnecessary quoted identifier.",
+        "groups": [
+          "all",
+          "references"
+        ],
+        "aliases": [
+          "L059"
+        ]
+      },
+      {
+        "code": "RF07",
+        "name": "references.window_alias",
+        "description": "Do not reference a column alias inside its own 'OVER' clause.",
+        "groups": [
+          "all",
+          "references"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "ST01",
+        "name": "structure.else_null",
+        "description": "Do not specify 'else null' in a case when statement (redundant).",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": [
+          "L035"
+        ]
+      },
+      {
+        "code": "ST02",
+        "name": "structure.simple_case",
+        "description": "Unnecessary 'CASE' statement.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": [
+          "L043"
+        ]
+      },
+      {
+        "code": "ST03",
+        "name": "structure.unused_cte",
+        "description": "Query defines a CTE (common-table expression) but does not use it.",
+        "groups": [
+          "all",
+          "core",
+          "structure"
+        ],
+        "aliases": [
+          "L045"
+        ]
+      },
+      {
+        "code": "ST04",
+        "name": "structure.nested_case",
+        "description": "Nested 'CASE' statement in 'ELSE' clause could be flattened.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": [
+          "L058"
+        ]
+      },
+      {
+        "code": "ST05",
+        "name": "structure.subquery",
+        "description": "Join/From clauses should not contain subqueries. Use CTEs instead.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": [
+          "L042"
+        ]
+      },
+      {
+        "code": "ST06",
+        "name": "structure.column_order",
+        "description": "Select wildcards then simple targets before calculations and aggregates.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": [
+          "L034"
+        ]
+      },
+      {
+        "code": "ST07",
+        "name": "structure.using",
+        "description": "Prefer specifying join keys instead of using 'USING'.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": [
+          "L032"
+        ]
+      },
+      {
+        "code": "ST08",
+        "name": "structure.distinct",
+        "description": "'DISTINCT' used with parentheses.",
+        "groups": [
+          "all",
+          "structure",
+          "core"
+        ],
+        "aliases": [
+          "L015"
+        ]
+      },
+      {
+        "code": "ST09",
+        "name": "structure.join_condition_order",
+        "description": "Joins should list the table referenced earlier/later first.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "ST10",
+        "name": "structure.constant_expression",
+        "description": "Redundant constant expression.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "ST11",
+        "name": "structure.unused_join",
+        "description": "Joined table not referenced in query.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "ST12",
+        "name": "structure.consecutive_semicolons",
+        "description": "Consecutive semicolons detected.",
+        "groups": [
+          "all",
+          "structure"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "TQ01",
+        "name": "tsql.sp_prefix",
+        "description": "'SP_' prefix should not be used for user-defined stored procedures in T-SQL.",
+        "groups": [
+          "all",
+          "tsql"
+        ],
+        "aliases": [
+          "L056"
+        ]
+      },
+      {
+        "code": "TQ02",
+        "name": "tsql.procedure_begin_end",
+        "description": "Procedure bodies with multiple statements should be wrapped in BEGIN/END.",
+        "groups": [
+          "all",
+          "tsql"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "TQ03",
+        "name": "tsql.empty_batch",
+        "description": "Remove empty batches.",
+        "groups": [
+          "all",
+          "tsql"
+        ],
+        "aliases": []
+      },
+      {
+        "code": "TQ04",
+        "name": "tsql.prefer_as_alias",
+        "description": "Prefer ANSI-style 'AS' aliasing over 'alias = expression' in T-SQL.",
+        "groups": [
+          "all",
+          "tsql"
+        ],
+        "aliases": []
+      }
+    ],
+    "groups": [
+      "aliasing",
+      "aliasing.unique",
+      "all",
+      "ambiguous",
+      "capitalisation",
+      "convention",
+      "core",
+      "jinja",
+      "layout",
+      "oracle",
+      "postgres",
+      "references",
+      "structure",
+      "tsql"
+    ],
+    "error": null,
+    "hint": null,
+    "fetched_at": 1792744662.3687994,
+    "dialect_count": 28,
+    "rule_count": 79
+  },
+  "roots": [
+    {
+      "label": "samples",
+      "path": "E:\\WorkBuddy-Work\\workbuddy-github-2\\lintloom\\samples",
+      "writable": true,
+      "sql_files": 3
+    },
+    {
+      "label": "workspace",
+      "path": "E:\\WorkBuddy-Work\\workbuddy-github-2\\lintloom\\workspace",
+      "writable": true,
+      "sql_files": 1
+    }
+  ],
+  "checks": [
+    {
+      "name": "解释器",
+      "ok": true,
+      "detail": "E:\\WorkBuddy-Work\\workbuddy-github-2\\lintloom\\.venv\\Scripts\\python.exe"
+    },
+    {
+      "name": "sqlfluff CLI",
+      "ok": true,
+      "detail": "python -m sqlfluff, version 4.4.0"
+    },
+    {
+      "name": "能力目录（方言/规则）",
+      "ok": true,
+      "detail": "28 个方言 / 79 条规则 · 来源 python-api"
+    },
+    {
+      "name": "写回开关",
+      "ok": true,
+      "detail": "允许应用修复"
+    }
+  ],
+  "limits": {
+    "timeout_max": 300.0,
+    "max_files": 200,
+    "max_file_bytes": 8388608,
+    "allowed_ext": [
+      ".j2",
+      ".jinja",
+      ".sql"
+    ]
+  }
+}

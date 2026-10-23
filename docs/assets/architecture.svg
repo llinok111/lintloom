@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="LintLoom 数据流与安全边界">
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#17120f"/>
+      <stop offset="1" stop-color="#1e1712"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b8783f"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="560" fill="url(#abg)"/>
+
+  <text x="40" y="46" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#f2c98d">数据流与安全边界</text>
+  <text x="40" y="72" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="13.5" fill="#a08e7e">浏览器只发 JSON；所有参数在落进 subprocess 之前必须过三道闸门</text>
+
+  <!-- 五个阶段 -->
+  <g>
+    <rect x="37" y="96" width="190" height="110" rx="10" fill="#221a15" stroke="#3a2d24"/>
+    <text x="132" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#f4e9dd">浏览器 UI</text>
+    <text x="132" y="154" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">零依赖 / 无构建</text>
+    <text x="132" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">7 个功能视图</text>
+  </g>
+
+  <line x1="231" y1="151" x2="265" y2="151" stroke="#b8783f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="248" y="141" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#7a6759">JSON</text>
+
+  <g>
+    <rect x="271" y="96" width="190" height="110" rx="10" fill="#221a15" stroke="#3a2d24"/>
+    <text x="366" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#f4e9dd">HTTP 层</text>
+    <text x="366" y="154" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">一次 token · Origin</text>
+    <text x="366" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">静态白名单</text>
+  </g>
+
+  <line x1="465" y1="151" x2="499" y2="151" stroke="#b8783f" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="505" y="96" width="190" height="110" rx="10" fill="#221a15" stroke="#3a2d24"/>
+    <text x="600" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#f4e9dd">作业调度</text>
+    <text x="600" y="154" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">真实进度 · 事件</text>
+    <text x="600" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">取消 · 淘汰</text>
+  </g>
+
+  <line x1="699" y1="151" x2="733" y2="151" stroke="#b8783f" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="739" y="96" width="190" height="110" rx="10" fill="#221a15" stroke="#3a2d24"/>
+    <text x="834" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#f4e9dd">引擎</text>
+    <text x="834" y="154" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">lint / fix / parse</text>
+    <text x="834" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">修复后再复核</text>
+  </g>
+
+  <line x1="933" y1="151" x2="967" y2="151" stroke="#b8783f" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="950" y="141" text-anchor="middle" font-family="Consolas, monospace" font-size="9.5" fill="#7a6759">argv</text>
+
+  <g>
+    <rect x="973" y="96" width="190" height="110" rx="10" fill="#2a1f18" stroke="#b8783f" stroke-opacity="0.6"/>
+    <text x="1068" y="130" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#f2c98d">sqlfluff CLI</text>
+    <text x="1068" y="154" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#c8b5a3">独立子进程</text>
+    <text x="1068" y="174" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#c8b5a3">可被整树回收</text>
+  </g>
+
+  <!-- 三道闸门 -->
+  <text x="40" y="252" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#f2c98d">三道闸门 · 全部有测试锁住</text>
+
+  <g>
+    <rect x="37" y="268" width="356" height="122" rx="10" fill="#1c1611" stroke="#3a2d24"/>
+    <text x="57" y="296" font-family="Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#e6d5c5">① 路径闸门</text>
+    <text x="57" y="322" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">根目录白名单（--root）</text>
+    <text x="57" y="344" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">realpath + commonpath 越界拒绝</text>
+    <text x="57" y="366" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">.sql / .jinja / .j2 白名单</text>
+  </g>
+
+  <g>
+    <rect x="429" y="268" width="356" height="122" rx="10" fill="#1c1611" stroke="#3a2d24"/>
+    <text x="449" y="296" font-family="Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#e6d5c5">② 参数闸门</text>
+    <text x="449" y="322" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">方言：运行时 28 个 label 白名单</text>
+    <text x="449" y="344" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">规则：真实 code / name / group</text>
+    <text x="449" y="366" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">超时与数值边界</text>
+  </g>
+
+  <g>
+    <rect x="821" y="268" width="356" height="122" rx="10" fill="#1c1611" stroke="#3a2d24"/>
+    <text x="841" y="296" font-family="Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#e6d5c5">③ 进程闸门</text>
+    <text x="841" y="322" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">argv-only，shell=False 硬编码</text>
+    <text x="841" y="344" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">超时 → taskkill /F /T ｜ killpg</text>
+    <text x="841" y="366" font-family="Consolas, monospace" font-size="11.5" fill="#a08e7e">临时目录 finally 整棵删除</text>
+  </g>
+
+  <!-- 产出 -->
+  <text x="40" y="436" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#f2c98d">真实产出（不是模拟数据）</text>
+  <g font-family="Consolas, monospace" font-size="12.5">
+    <rect x="37" y="452" width="158" height="34" rx="8" fill="#221a15" stroke="#3a2d24"/>
+    <text x="116" y="474" text-anchor="middle" fill="#d8c7b6">违规 JSON</text>
+
+    <rect x="211" y="452" width="158" height="34" rx="8" fill="#221a15" stroke="#3a2d24"/>
+    <text x="290" y="474" text-anchor="middle" fill="#d8c7b6">unified diff</text>
+
+    <rect x="385" y="452" width="158" height="34" rx="8" fill="#221a15" stroke="#3a2d24"/>
+    <text x="464" y="474" text-anchor="middle" fill="#d8c7b6">segment 树</text>
+
+    <rect x="559" y="452" width="158" height="34" rx="8" fill="#221a15" stroke="#3a2d24"/>
+    <text x="638" y="474" text-anchor="middle" fill="#d8c7b6">阶段/规则计时</text>
+
+    <rect x="733" y="452" width="212" height="34" rx="8" fill="#221a15" stroke="#3a2d24"/>
+    <text x="839" y="474" text-anchor="middle" fill="#d8c7b6">真实 argv 与退出码</text>
+  </g>
+
+  <text x="40" y="524" font-family="Consolas, monospace" font-size="11.5" fill="#7a6759">证据：docs/VERIFICATION.md ｜ 100 项测试（含真实 CLI 集成）｜ 界面真机 24 项 ｜ ZIP 解压重装复跑一致</text>
+</svg>

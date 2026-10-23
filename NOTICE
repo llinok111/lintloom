@@ -1,0 +1,31 @@
+LintLoom
+Copyright (c) 2026 LintLoom contributors
+Licensed under the MIT License (see LICENSE).
+
+======================================================================
+THIRD-PARTY SOFTWARE
+======================================================================
+
+1) sqlfluff
+   Repository : https://github.com/sqlfluff/sqlfluff
+   Version    : 4.4.0 (pinned in requirements.txt)
+   License    : MIT License
+   Copyright  : sqlfluff contributors
+   Usage      : 以子进程方式调用其命令行接口（lint / fix / parse / --version），
+                并通过其公开 Python API（Linter.rule_tuples()、
+                dialects.dialect_readout()）读取方言与规则清单。
+                本项目未修改、未复制其源代码。
+
+   sqlfluff 的完整 MIT 许可全文随 pip 包一起安装，通常位于
+   .venv/Lib/site-packages/sqlfluff-4.4.0.dist-info/LICENSE.md
+   也可在上游仓库的 LICENSE.md 查看。
+
+2) sqlfluff 的运行时依赖（由 pip 自动解析安装，未在本项目内修改）
+   包括但不限于：click, colorama, diff-cover, Jinja2, pathspec, platformdirs,
+   pluggy, pygments, PyYAML, regex, tblib, tqdm, chardet。
+   各自许可见对应发行包的 dist-info 目录。
+
+======================================================================
+本项目的原创代码（app/、tests/、run.py、app/web/）为 MIT，见 LICENSE。
+本项目不包含任何第三方源代码副本。
+======================================================================
