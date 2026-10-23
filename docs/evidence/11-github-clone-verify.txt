@@ -1,0 +1,30 @@
+
+--- 界面验收（从 GitHub 克隆的仓库，端口 8736）---
+base=http://127.0.0.1:8736/
+来源=git clone git@github-llinok111:llinok111/lintloom.git
+环境=新建 .venv + pip install -r requirements.txt（全新，无本地残留）
+PASS  环境徽标全部正常 :: sqlfluff 4.4.0 | 方言 28 | 规则 79 | 可写回
+PASS  方言下拉 = 28 :: 28
+PASS  规则面板 = 79 :: 79
+PASS  根目录下拉可用 :: 2 个根
+PASS  文件树有内容 :: 4 项
+PASS  目标已锁定为目录 :: 目录 samples/warehouse
+PASS  目录诊断：2 文件 / 9 行 :: 2 文件 / 9 行
+PASS  规则码来自上游 :: LT09,AL01,LT14,LT05,LT01
+PASS  进度条 100% :: 
+PASS  统计条有汇总 :: 9 项 0/2 文件干净 可自动修 9 2.37 s
+PASS  问题行 → 代码定位准确 :: 期望 1, 实际 1, 代码 2 行
+PASS  修复预览产出 diff :: 2 文件 +13/-2
+PASS  预览附带修复后复核结果 :: +6 / −1 · 复核剩余 0 项
+PASS  语法树渲染 segment :: 52 组 / 95 叶子
+PASS  计时条非零 :: 24 条
+PASS  日志含真实 argv :: 5 条事件
+PASS  stdin 模式返回违规 :: 9 行
+PASS  写回前弹出确认框 :: 将把 1 个文件的修复结果写回原路径：  ui-demo/demo_orders.sql  原件会先备份到 .lintl
+PASS  写回真的改了文件 :: 218 → 249 字节
+PASS  写回结果含备份路径 :: 写回结果 / 写入 1 · 跳过 0 / 
+PASS  备份文件真实落盘 :: E:\WorkBuddy-Work\workbuddy-github-2\_clone-lintloom\.lintloom-backups\20261023-181940\workspace\ui-demo\demo_orders.sql
+PASS  运行期无 JS 错误 :: 无
+PASS  布局尺寸合理 :: {"topbar":{"w":1600,"h":54},"rail":{"w":344,"h":946},"main":{"w":1256,"h":946},"view":{"w":1256,"h":873},"overflowX":false}
+PASS  无水平溢出 :: 
+合计 24 项，失败 0 项

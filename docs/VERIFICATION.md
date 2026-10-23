@@ -318,3 +318,53 @@ python -m venv .venv
 .venv/Scripts/python -m unittest discover -s tests
 .venv/Scripts/python run.py
 ```
+
+---
+
+## 9. 从 GitHub 克隆后的独立验证
+
+不只验证本地源码树，而是 **从远端重新 clone**，在全新目录重建环境再跑一遍：
+
+```
+$ git clone git@github-llinok111:llinok111/lintloom.git _clone-lintloom
+$ cd _clone-lintloom && git log --oneline | head -1
+c6e4bb8 LintLoom 1.0.0: a clickable workbench for sqlfluff
+
+$ python -m venv .venv
+$ .venv/Scripts/python -m pip install -r requirements.txt      # exit=0
+$ .venv/Scripts/python -m sqlfluff --version
+python -m sqlfluff, version 4.4.0
+
+$ .venv/Scripts/python run.py --selftest                       # exit=0
+catalog True python-api 28 79
+
+$ .venv/Scripts/python -m unittest discover -s tests
+Ran 100 tests in 73.179s
+OK (skipped=1)
+```
+
+界面验收（服务跑在 8736）：
+
+```
+合计 24 项，通过 24，失败 0
+```
+
+含「写回真实改文件（218→249 字节）」与「备份落盘」。完整逐项记录：
+`docs/evidence/11-github-clone-verify.txt`。
+
+### 9.1 一个必须澄清的假差异
+
+首次用 `sha256sum` 比对本地与克隆的文件，出现 5 个 DIFF。原因不是内容不同，而是
+**本机全局 `core.autocrlf=true`** 让 clone 出的工作区把 LF 转成 CRLF。
+
+正确判断方式是比较 **git blob 哈希**（不受工作区换行策略影响）：
+
+```
+$ git -C lintloom rev-parse HEAD:app/runner.py
+9bdebec7037ae66eb1883221797203213a6e7d92
+$ git -C _clone-lintloom rev-parse HEAD:app/runner.py
+9bdebec7037ae66eb1883221797203213a6e7d92
+```
+
+`run.py / app/runner.py / app/paths.py / app/engine.py / app/web/app.js /
+docs/assets/banner.svg / README.md` 全部 SAME。**结论：仓库内容与已验证内容逐字节一致。**
